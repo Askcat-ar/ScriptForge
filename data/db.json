@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "u_1788901871935",
+      "username": "askcat",
+      "passwordHash": "$2a$10$GDxnBzZ29d4T8kKN6fDSAeRMcTtVmOrjFBaWb3hErTmJzBnfVGJd.",
+      "recoveryKey": "forge-script-2196",
+      "followers": [
+        "sss"
+      ],
+      "following": [
+        "sss"
+      ]
+    }
+  ],
+  "publicScripts": [
+    {
+      "id": "pub_1788902268191",
+      "originalId": "s_1788899929914",
+      "author": "askcat",
+      "title": "Primer guion de la pagina",
+      "mode": "tiktok",
+      "category": "Tops / Curiosidades",
+      "blocks": [
+        {
+          "id": "b_1788899929914",
+          "character": "",
+          "category": "Llamado a la acción",
+          "content": "ESTE ES EL PRIMER GUION DE ESTA PAGINA JAJA"
+        }
+      ],
+      "likes": [
+        "askcat"
+      ],
+      "dislikes": [],
+      "viewedBy": [
+        "sss"
+      ],
+      "anonymousViews": 0,
+      "date": "8/9/2026"
+    }
+  ]
+}
