@@ -70,7 +70,7 @@
   <!-- HEADER -->
   <header class="h-16 shrink-0 bg-ink-900 border-b border-slate-800/80 flex items-center justify-between px-4 z-20">
     <div class="flex items-center gap-3">
-      <button onclick="toggleSidebar()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" title="Mostrar/Ocultar Barra Lateral">
+      <button onclick="toggleSidebar()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" data-i18n-title="header.toggleSidebar" title="Mostrar/Ocultar Barra Lateral">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
@@ -85,16 +85,18 @@
     <!-- PESTAÑAS NAVEGACIÓN -->
     <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
       <button id="tabBtnEditor" onclick="switchMainTab('editor')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition bg-indigo-600 text-white">
-        📝 Editor
+        📝 <span data-i18n="nav.editor">Editor</span>
       </button>
       <button id="tabBtnCommunity" onclick="switchMainTab('community')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
-        🌐 Comunidad
+        🌐 <span data-i18n="nav.community">Comunidad</span>
       </button>
     </div>
 
     <!-- USUARIO Y AJUSTES -->
     <div class="flex items-center gap-2">
       <div id="authHeaderArea"></div>
+
+      <button onclick="toggleLanguage()" id="langToggleBtn" class="px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white hover:bg-slate-800 transition border border-slate-800" title="Change language / Cambiar idioma">🌐 ES</button>
 
       <button onclick="toggleSettingsMenu()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,9 +106,9 @@
       </button>
 
       <div id="settingsPanel" class="hidden absolute right-4 top-14 w-64 bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-2xl z-50">
-        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Opciones Visuales</h3>
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3" data-i18n="settings.title">Opciones Visuales</h3>
         <div class="flex items-center justify-between">
-          <span class="text-xs text-slate-300 font-medium">Texto para Dislexia (Lexend)</span>
+          <span class="text-xs text-slate-300 font-medium" data-i18n="settings.dyslexia">Texto para Dislexia (Lexend)</span>
           <button id="dyslexiaToggle" onclick="toggleDyslexiaMode()" class="w-10 h-5 bg-slate-800 rounded-full relative p-0.5 transition-colors">
             <span class="block w-4 h-4 bg-slate-400 rounded-full transition-transform transform translate-x-0"></span>
           </button>
@@ -122,26 +124,26 @@
     <aside id="sidebar" class="w-64 bg-ink-900 border-r border-slate-800/80 flex flex-col shrink-0 z-10">
       <div class="p-3 border-b border-slate-800/60 flex gap-2">
         <button onclick="createNewScript()" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs py-2 px-3 rounded-lg transition flex items-center justify-center gap-1.5 shadow-md">
-          <span>＋</span> Nuevo Guion
+          <span>＋</span> <span data-i18n="sidebar.newScript">Nuevo Guion</span>
         </button>
-        <button onclick="createNewFolder()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2 rounded-lg transition" title="Nueva Carpeta">📁</button>
+        <button onclick="createNewFolder()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 p-2 rounded-lg transition" data-i18n-title="sidebar.newFolder" title="Nueva Carpeta">📁</button>
       </div>
 
       <div class="flex-1 overflow-y-auto p-3 space-y-4">
         <div>
-          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2 px-1">Mis Guiones</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-2 px-1" data-i18n="sidebar.myScripts">Mis Guiones</span>
           <div id="sidebarList" class="space-y-1"></div>
         </div>
       </div>
 
       <div class="p-3 border-t border-slate-800/60 bg-slate-950/40 space-y-2">
         <div class="flex gap-2">
-          <button onclick="exportScript('md')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-medium py-1.5 px-2 rounded-md transition text-center disabled:opacity-50" id="btnExportMd" disabled>Exportar .MD</button>
-          <button onclick="exportScript('txt')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-medium py-1.5 px-2 rounded-md transition text-center disabled:opacity-50" id="btnExportTxt" disabled>Exportar .TXT</button>
+          <button onclick="exportScript('md')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-medium py-1.5 px-2 rounded-md transition text-center disabled:opacity-50" id="btnExportMd" disabled data-i18n="sidebar.exportMd">Exportar .MD</button>
+          <button onclick="exportScript('txt')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-medium py-1.5 px-2 rounded-md transition text-center disabled:opacity-50" id="btnExportTxt" disabled data-i18n="sidebar.exportTxt">Exportar .TXT</button>
         </div>
         <div class="flex items-center gap-2 text-[10px] text-slate-500 justify-center">
           <span id="saveStatusIndicator" class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          <span id="saveIndicator">Todo guardado</span>
+          <span id="saveIndicator" data-i18n="sidebar.allSaved">Todo guardado</span>
         </div>
       </div>
     </aside>
@@ -157,21 +159,21 @@
           
           <div class="flex items-center gap-2 min-w-[200px]">
             <span class="text-xs text-slate-500">✍️</span>
-            <input id="scriptTitleInput" type="text" class="bg-transparent text-slate-200 text-sm font-bold focus:outline-none focus:border-b focus:border-indigo-500 w-full" placeholder="Nombre del guion..." oninput="updateActiveScriptTitle(this.value)" />
+            <input id="scriptTitleInput" type="text" class="bg-transparent text-slate-200 text-sm font-bold focus:outline-none focus:border-b focus:border-indigo-500 w-full" data-i18n-placeholder="editor.titlePlaceholder" placeholder="Nombre del guion..." oninput="updateActiveScriptTitle(this.value)" />
           </div>
 
           <div class="flex items-center gap-2">
             <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg px-2 py-1">
-              <span class="text-[10px] font-bold text-slate-500 mr-1.5 uppercase">Formato:</span>
+              <span class="text-[10px] font-bold text-slate-500 mr-1.5 uppercase" data-i18n="editor.format">Formato:</span>
               <select id="modeSelector" onchange="handleFormatChange(this.value)" class="bg-transparent text-xs font-semibold focus:outline-none text-indigo-400">
-                <option value="tiktok">📱 TikTok / Reel</option>
-                <option value="youtube">🎬 YouTube Long</option>
-                <option value="story">🎭 Historia / Novela</option>
+                <option value="tiktok" data-i18n="format.tiktok">📱 TikTok / Reel</option>
+                <option value="youtube" data-i18n="format.youtube">🎬 YouTube Long</option>
+                <option value="story" data-i18n="format.story">🎭 Historia / Novela</option>
               </select>
             </div>
 
             <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg px-2 py-1">
-              <span class="text-[10px] font-bold text-slate-500 mr-1.5 uppercase">Categoría:</span>
+              <span class="text-[10px] font-bold text-slate-500 mr-1.5 uppercase" data-i18n="editor.category">Categoría:</span>
               <select id="categorySelector" onchange="handleCategoryChange(this.value)" class="bg-transparent text-xs font-semibold focus:outline-none text-emerald-400">
               </select>
             </div>
@@ -179,9 +181,9 @@
 
           <div class="flex items-center gap-2">
             <button onclick="publishActiveScript()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition flex items-center gap-1.5 shadow-lg">
-              <span>🚀</span> Publicar
+              <span>🚀</span> <span data-i18n="editor.publish">Publicar</span>
             </button>
-            <button onclick="exitScript()" class="bg-slate-800 hover:bg-red-500/20 text-slate-300 hover:text-red-400 border border-slate-700 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition">🚪 Salir</button>
+            <button onclick="exitScript()" class="bg-slate-800 hover:bg-red-500/20 text-slate-300 hover:text-red-400 border border-slate-700 text-xs font-semibold px-2.5 py-1.5 rounded-lg transition">🚪 <span data-i18n="editor.exit">Salir</span></button>
           </div>
         </div>
 
@@ -189,40 +191,40 @@
         <div id="emptyState" class="flex-1 overflow-y-auto p-6 md:p-10 max-w-5xl mx-auto w-full">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 bg-slate-900/60 p-6 rounded-2xl border border-slate-800/80 shadow-xl">
             <div>
-              <h2 class="text-2xl font-bold text-white mb-1">¡Hola de nuevo! 👋</h2>
-              <p class="text-xs text-slate-400">Selecciona una opción o elige una plantilla para estructurar tus ideas al instante.</p>
+              <h2 class="text-2xl font-bold text-white mb-1" data-i18n="empty.greeting">¡Hola de nuevo! 👋</h2>
+              <p class="text-xs text-slate-400" data-i18n="empty.subtitle">Selecciona una opción o elige una plantilla para estructurar tus ideas al instante.</p>
             </div>
             <div>
               <input type="file" id="importFileInput" accept=".txt,.md" class="hidden" onchange="handleImportFile(event)" />
               <button onclick="document.getElementById('importFileInput').click()" class="w-full md:w-auto bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-indigo-300 font-semibold text-xs px-4 py-2.5 rounded-xl transition flex items-center justify-center gap-2 shadow-lg">
-                <span>📥</span> Importar Guion (.txt, .md)
+                <span>📥</span> <span data-i18n="empty.import">Importar Guion (.txt, .md)</span>
               </button>
             </div>
           </div>
 
           <div class="mb-10">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2"><span>🚀</span> Plantillas Predefinidas</h3>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2"><span>🚀</span> <span data-i18n="empty.templatesTitle">Plantillas Predefinidas</span></h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div onclick="createTemplateScript('tiktok')" class="bg-slate-900/40 hover:bg-slate-900 border border-slate-800/80 p-5 rounded-2xl cursor-pointer transition group">
                 <div class="text-3xl mb-3">📱</div>
-                <h4 class="text-sm font-bold text-white mb-1 group-hover:text-indigo-400 transition">TikTok / Instagram Reels</h4>
-                <p class="text-xs text-slate-400">Gancho visual de 3s, retención de valor y llamada a la acción rápida.</p>
+                <h4 class="text-sm font-bold text-white mb-1 group-hover:text-indigo-400 transition" data-i18n="empty.tiktokTitle">TikTok / Instagram Reels</h4>
+                <p class="text-xs text-slate-400" data-i18n="empty.tiktokDesc">Gancho visual de 3s, retención de valor y llamada a la acción rápida.</p>
               </div>
               <div onclick="createTemplateScript('youtube')" class="bg-slate-900/40 hover:bg-slate-900 border border-slate-800/80 p-5 rounded-2xl cursor-pointer transition group">
                 <div class="text-3xl mb-3">🎬</div>
-                <h4 class="text-sm font-bold text-white mb-1 group-hover:text-emerald-400 transition">Video para YouTube</h4>
-                <p class="text-xs text-slate-400">Estructura tradicional con intro, desarrollo detallado y cierre.</p>
+                <h4 class="text-sm font-bold text-white mb-1 group-hover:text-emerald-400 transition" data-i18n="empty.youtubeTitle">Video para YouTube</h4>
+                <p class="text-xs text-slate-400" data-i18n="empty.youtubeDesc">Estructura tradicional con intro, desarrollo detallado y cierre.</p>
               </div>
               <div onclick="createTemplateScript('story')" class="bg-slate-900/40 hover:bg-slate-900 border border-slate-800/80 p-5 rounded-2xl cursor-pointer transition group">
                 <div class="text-3xl mb-3">🎭</div>
-                <h4 class="text-sm font-bold text-white mb-1 group-hover:text-amber-400 transition">Historia / Narrativa</h4>
-                <p class="text-xs text-slate-400">Guion basado en personajes, planteamiento de la escena y conflicto.</p>
+                <h4 class="text-sm font-bold text-white mb-1 group-hover:text-amber-400 transition" data-i18n="empty.storyTitle">Historia / Narrativa</h4>
+                <p class="text-xs text-slate-400" data-i18n="empty.storyDesc">Guion basado en personajes, planteamiento de la escena y conflicto.</p>
               </div>
             </div>
           </div>
 
           <div>
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2"><span>🕒</span> Últimos Guiones Editados</h3>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2"><span>🕒</span> <span data-i18n="empty.recentTitle">Últimos Guiones Editados</span></h3>
             <div id="recentScriptsContainer" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
           </div>
         </div>
@@ -232,8 +234,8 @@
           <div id="blocksContainer" class="flex-1 overflow-y-auto p-4 space-y-4 max-w-4xl mx-auto w-full"></div>
           <div class="h-14 border-t border-slate-900 bg-ink-900/60 px-6 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-2">
-              <button onclick="addNewBlock()" class="bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-indigo-400 text-xs font-semibold px-3 py-2 rounded-lg transition">＋ Añadir bloque</button>
-              <button onclick="manualSaveScript()" class="bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-400 text-xs font-semibold px-3 py-2 rounded-lg transition">💾 Guardar Guion</button>
+              <button onclick="addNewBlock()" class="bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-indigo-400 text-xs font-semibold px-3 py-2 rounded-lg transition">＋ <span data-i18n="editor.addBlock">Añadir bloque</span></button>
+              <button onclick="manualSaveScript()" class="bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-400 text-xs font-semibold px-3 py-2 rounded-lg transition">💾 <span data-i18n="editor.saveScript">Guardar Guion</span></button>
             </div>
             <span id="totalTimeCounter" class="text-xs font-bold text-slate-400 bg-slate-900 px-3 py-1.5 rounded-md border border-slate-800/80">Tiempo estimado: 0s</span>
           </div>
@@ -244,8 +246,8 @@
       <div id="communityView" class="flex-1 overflow-y-auto p-6 md:p-10 max-w-5xl mx-auto w-full hidden">
         <div class="mb-6 bg-gradient-to-r from-indigo-900/40 to-slate-900 p-6 rounded-2xl border border-indigo-500/20 flex flex-col items-start justify-between gap-4">
           <div>
-            <h2 class="text-2xl font-bold text-white mb-1">🌐 Comunidad de Guionistas</h2>
-            <p class="text-xs text-slate-300">Explora publicaciones de la comunidad o busca contenido específico usando los filtros avanzados.</p>
+            <h2 class="text-2xl font-bold text-white mb-1" data-i18n="community.title">🌐 Comunidad de Guionistas</h2>
+            <p class="text-xs text-slate-300" data-i18n="community.subtitle">Explora publicaciones de la comunidad o busca contenido específico usando los filtros avanzados.</p>
           </div>
           
           <!-- BUSCADOR Y FILTROS AVANZADOS -->
@@ -254,7 +256,7 @@
             <!-- BARRA DE BÚSQUEDA -->
             <div class="relative w-full">
               <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">🔍</span>
-              <input type="text" id="searchQuery" oninput="renderCommunityFeed()" placeholder="Buscar por título, autor o contenido del guion..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 transition" />
+              <input type="text" id="searchQuery" oninput="renderCommunityFeed()" data-i18n-placeholder="community.searchPlaceholder" placeholder="Buscar por título, autor o contenido del guion..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 transition" />
             </div>
 
             <!-- CONTROLES Y FILTROS -->
@@ -262,29 +264,29 @@
               
               <!-- FILTRO FORMATO -->
               <select id="filterMode" onchange="renderCommunityFeed()" class="bg-slate-950 border border-slate-800 text-xs text-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
-                <option value="all">🎬 Todos los Formatos</option>
+                <option value="all" data-i18n="community.filterAllFormats">🎬 Todos los Formatos</option>
                 <option value="youtube">📺 YouTube</option>
-                <option value="tiktok">📱 TikTok / Reel</option>
-                <option value="story">🎭 Historia / Novela</option>
+                <option value="tiktok" data-i18n="format.tiktok">📱 TikTok / Reel</option>
+                <option value="story" data-i18n="community.optStory">🎭 Historia / Novela</option>
               </select>
 
               <!-- FILTRO CATEGORÍA -->
               <select id="filterCategory" onchange="renderCommunityFeed()" class="bg-slate-950 border border-slate-800 text-xs text-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
-                <option value="all">🏷️ Todas las Categorías</option>
+                <option value="all" data-i18n="community.filterAllCategories">🏷️ Todas las Categorías</option>
               </select>
 
               <!-- ORDENAMIENTO -->
               <select id="filterSort" onchange="renderCommunityFeed()" class="bg-slate-950 border border-slate-800 text-xs text-slate-300 rounded-xl px-3 py-2 focus:outline-none focus:border-indigo-500">
-                <option value="recent">🕒 Más Recientes</option>
-                <option value="popular">👍 Más Valorados</option>
-                <option value="mostViewed">👁️ Más Vistos</option>
-                <option value="forYou">✨ Recomendados (Para Ti)</option>
-                <option value="following">🔔 Siguiendo</option>
+                <option value="recent" data-i18n="community.sortRecent">🕒 Más Recientes</option>
+                <option value="popular" data-i18n="community.sortPopular">👍 Más Valorados</option>
+                <option value="mostViewed" data-i18n="community.sortMostViewed">👁️ Más Vistos</option>
+                <option value="forYou" data-i18n="community.sortForYou">✨ Recomendados (Para Ti)</option>
+                <option value="following" data-i18n="community.sortFollowing">🔔 Siguiendo</option>
               </select>
 
               <!-- BOTÓN REINICIAR -->
               <button onclick="resetCommunityFilters()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold px-3 py-2 rounded-xl transition flex items-center justify-center gap-1">
-                <span>🔄</span> Limpiar Filtros
+                <span>🔄</span> <span data-i18n="community.resetFilters">Limpiar Filtros</span>
               </button>
 
             </div>
@@ -305,7 +307,7 @@
         <span id="readModalCategory" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 uppercase tracking-wider"></span>
       </div>
       <button onclick="closeReadScriptModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-bold text-xs px-4 py-2 rounded-xl transition flex items-center gap-2">
-        <span>✕</span> Cerrar lectura
+        <span>✕</span> <span data-i18n="readModal.close">Cerrar lectura</span>
       </button>
     </div>
 
@@ -327,9 +329,9 @@
       <div class="text-center">
         <div class="inline-flex items-center gap-2 text-indigo-400 font-bold text-xl mb-1">👤 <span id="profileUsername"></span></div>
         <div class="flex items-center justify-center gap-4 text-xs text-slate-400 mt-3">
-          <span><span id="profileFollowersCount" class="text-white font-bold"></span> seguidores</span>
-          <span><span id="profileFollowingCount" class="text-white font-bold"></span> siguiendo</span>
-          <span><span id="profileScriptsCount" class="text-white font-bold"></span> guiones</span>
+          <span><span id="profileFollowersCount" class="text-white font-bold"></span> <span data-i18n="profile.followers">seguidores</span></span>
+          <span><span id="profileFollowingCount" class="text-white font-bold"></span> <span data-i18n="profile.following">siguiendo</span></span>
+          <span><span id="profileScriptsCount" class="text-white font-bold"></span> <span data-i18n="profile.scripts">guiones</span></span>
         </div>
       </div>
       <button id="profileFollowBtn" onclick="toggleFollowFromProfile()" class="w-full py-2.5 rounded-xl font-bold text-xs transition"></button>
@@ -343,22 +345,22 @@
       <button onclick="closeAccountModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white">✕</button>
       
       <div class="text-center">
-        <div class="inline-flex items-center gap-2 text-indigo-400 font-bold text-xl mb-1">👤 Configuración de Cuenta</div>
-        <p class="text-xs text-slate-400">Gestiona tu perfil o elimina tus datos de la plataforma.</p>
+        <div class="inline-flex items-center gap-2 text-indigo-400 font-bold text-xl mb-1">👤 <span data-i18n="account.title">Configuración de Cuenta</span></div>
+        <p class="text-xs text-slate-400" data-i18n="account.subtitle">Gestiona tu perfil o elimina tus datos de la plataforma.</p>
       </div>
 
       <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
         <div class="flex justify-between items-center text-xs">
-          <span class="text-slate-400">Usuario:</span>
+          <span class="text-slate-400" data-i18n="account.username">Usuario:</span>
           <span id="accountModalUser" class="text-white font-bold"></span>
         </div>
       </div>
 
       <div class="pt-2 border-t border-slate-800/80">
-        <h4 class="text-xs font-bold text-red-400 uppercase tracking-wider mb-2">Zona Peligrosa</h4>
-        <p class="text-[11px] text-slate-400 mb-3">Si eliminas tu cuenta, se borrarán todos tus guiones locales, la clave de acceso y tus publicaciones públicas de la comunidad.</p>
+        <h4 class="text-xs font-bold text-red-400 uppercase tracking-wider mb-2" data-i18n="account.dangerZone">Zona Peligrosa</h4>
+        <p class="text-[11px] text-slate-400 mb-3" data-i18n="account.dangerDesc">Si eliminas tu cuenta, se borrarán todos tus guiones locales, la clave de acceso y tus publicaciones públicas de la comunidad.</p>
         <button onclick="deleteUserAccount()" class="w-full bg-red-600/20 hover:bg-red-600/30 border border-red-500/40 text-red-400 text-xs font-bold py-2.5 rounded-xl transition shadow-lg">
-          💥 Eliminar Mi Cuenta Permanentemente
+          💥 <span data-i18n="account.deleteBtn">Eliminar Mi Cuenta Permanentemente</span>
         </button>
       </div>
     </div>
@@ -370,59 +372,59 @@
       <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-500 hover:text-white">✕</button>
       <div class="text-center mb-6">
         <div class="inline-flex items-center gap-2 text-indigo-400 font-bold text-2xl mb-1"><span>✦</span> ScriptForge</div>
-        <p id="authSubtitle" class="text-xs text-slate-400">Inicia sesión para interactuar en la comunidad</p>
+        <p id="authSubtitle" class="text-xs text-slate-400" data-i18n="auth.subtitle">Inicia sesión para interactuar en la comunidad</p>
       </div>
 
       <div id="authAlert" class="hidden text-xs p-3 rounded-lg mb-4 text-center font-medium"></div>
 
       <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Nombre de Usuario</label>
-          <input type="text" id="loginUser" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="Ej. guionista99" />
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.username">Nombre de Usuario</label>
+          <input type="text" id="loginUser" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" data-i18n-placeholder="auth.usernamePlaceholder" placeholder="Ej. guionista99" />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Contraseña</label>
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.password">Contraseña</label>
           <input type="password" id="loginPass" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="••••••••" />
         </div>
         <div class="text-right">
-          <button type="button" onclick="switchAuthSubView('recovery')" class="text-[11px] text-indigo-400 hover:underline">¿Olvidaste tu contraseña?</button>
+          <button type="button" onclick="switchAuthSubView('recovery')" class="text-[11px] text-indigo-400 hover:underline" data-i18n="auth.forgotPassword">¿Olvidaste tu contraseña?</button>
         </div>
-        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs py-2.5 rounded-lg transition shadow-lg">Iniciar Sesión</button>
-        <p class="text-center text-xs text-slate-500 pt-2">¿No tienes cuenta? <button type="button" onclick="switchAuthSubView('register')" class="text-indigo-400 font-semibold hover:underline">Regístrate</button></p>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs py-2.5 rounded-lg transition shadow-lg" data-i18n="auth.loginBtn">Iniciar Sesión</button>
+        <p class="text-center text-xs text-slate-500 pt-2"><span data-i18n="auth.noAccount">¿No tienes cuenta?</span> <button type="button" onclick="switchAuthSubView('register')" class="text-indigo-400 font-semibold hover:underline" data-i18n="auth.registerLink">Regístrate</button></p>
       </form>
 
       <form id="registerForm" onsubmit="handleRegister(event)" class="space-y-4 hidden">
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Nombre de Usuario</label>
-          <input type="text" id="regUser" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="Ej. guionista99" />
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.username">Nombre de Usuario</label>
+          <input type="text" id="regUser" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" data-i18n-placeholder="auth.usernamePlaceholder" placeholder="Ej. guionista99" />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Contraseña</label>
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.password">Contraseña</label>
           <input type="password" id="regPass" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="••••••••" />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Confirmar Contraseña</label>
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.confirmPassword">Confirmar Contraseña</label>
           <input type="password" id="regPassConfirm" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" placeholder="••••••••" />
         </div>
-        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs py-2.5 rounded-lg transition shadow-lg">Crear Cuenta</button>
-        <p class="text-center text-xs text-slate-500 pt-2">¿Ya tienes cuenta? <button type="button" onclick="switchAuthSubView('login')" class="text-indigo-400 font-semibold hover:underline">Inicia Sesión</button></p>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs py-2.5 rounded-lg transition shadow-lg" data-i18n="auth.registerBtn">Crear Cuenta</button>
+        <p class="text-center text-xs text-slate-500 pt-2"><span data-i18n="auth.hasAccount">¿Ya tienes cuenta?</span> <button type="button" onclick="switchAuthSubView('login')" class="text-indigo-400 font-semibold hover:underline" data-i18n="auth.loginLink">Inicia Sesión</button></p>
       </form>
 
       <form id="recoveryForm" onsubmit="handleRecovery(event)" class="space-y-4 hidden">
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Usuario</label>
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.usernameShort">Usuario</label>
           <input type="text" id="recUser" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-indigo-500" />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Clave Secreta de Recuperación</label>
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.recoveryKey">Clave Secreta de Recuperación</label>
           <input type="text" id="recKey" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-indigo-300 font-mono focus:outline-none" placeholder="ej. script-forge-1234" />
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Nueva Contraseña</label>
+          <label class="block text-xs font-semibold text-slate-400 mb-1" data-i18n="auth.newPassword">Nueva Contraseña</label>
           <input type="password" id="recNewPass" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none" />
         </div>
-        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs py-2.5 rounded-lg transition shadow-lg">Restablecer Contraseña</button>
-        <p class="text-center text-xs text-slate-500 pt-2"><button type="button" onclick="switchAuthSubView('login')" class="text-slate-400 hover:underline">Volver a Login</button></p>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs py-2.5 rounded-lg transition shadow-lg" data-i18n="auth.resetBtn">Restablecer Contraseña</button>
+        <p class="text-center text-xs text-slate-500 pt-2"><button type="button" onclick="switchAuthSubView('login')" class="text-slate-400 hover:underline" data-i18n="auth.backToLogin">Volver a Login</button></p>
       </form>
     </div>
   </div>
@@ -431,14 +433,14 @@
   <div id="keyModal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-indigo-500/40 rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 text-center">
       <span class="text-4xl">🔐</span>
-      <h3 class="text-base font-bold text-white">¡Guarda tu Clave Secreta!</h3>
+      <h3 class="text-base font-bold text-white" data-i18n="keyModal.title">¡Guarda tu Clave Secreta!</h3>
       <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
         <span id="generatedKey" class="font-mono text-indigo-400 font-bold text-sm select-all tracking-wider"></span>
       </div>
-      <p class="text-xs text-red-400 font-semibold leading-relaxed bg-red-500/10 p-3 rounded-xl border border-red-500/20">
+      <p class="text-xs text-red-400 font-semibold leading-relaxed bg-red-500/10 p-3 rounded-xl border border-red-500/20" data-i18n-html="keyModal.warning">
         ⚠️ <strong>IMPORTANTE:</strong> Esta es la <u>ÚNICA VEZ</u> que se mostrará este código. Guárdalo bien en un lugar seguro, ya que no se volverá a mostrar en ningún otro apartado.
       </p>
-      <button onclick="closeKeyModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold py-2.5 rounded-xl transition">Entendido, Continuar</button>
+      <button onclick="closeKeyModal()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold py-2.5 rounded-xl transition" data-i18n="keyModal.confirmBtn">Entendido, Continuar</button>
     </div>
   </div>
 
@@ -449,6 +451,341 @@
       video: ["Educación", "Entretenimiento", "Terror / Creepypastas", "Tops / Curiosidades", "Gaming / Videojuegos", "Finanzas / Dinero", "Estilo de Vida"],
       story: ["Comedia", "Terror / Suspenso", "Romance / Novela", "Drama", "Ciencia Ficción", "Fantasía"]
     };
+
+    // Traducción de las categorías/tipos de bloque: el VALOR guardado (usado
+    // para filtrar, comparar y guardar en el servidor) siempre es el texto
+    // en español de arriba —así los guiones ya publicados no se rompen—.
+    // Este diccionario solo cambia lo que se MUESTRA en pantalla.
+    const CATEGORY_LABELS = {
+      "Educación": { es: "Educación", en: "Education" },
+      "Entretenimiento": { es: "Entretenimiento", en: "Entertainment" },
+      "Terror / Creepypastas": { es: "Terror / Creepypastas", en: "Horror / Creepypasta" },
+      "Tops / Curiosidades": { es: "Tops / Curiosidades", en: "Top Lists / Trivia" },
+      "Gaming / Videojuegos": { es: "Gaming / Videojuegos", en: "Gaming" },
+      "Finanzas / Dinero": { es: "Finanzas / Dinero", en: "Finance / Money" },
+      "Estilo de Vida": { es: "Estilo de Vida", en: "Lifestyle" },
+      "Comedia": { es: "Comedia", en: "Comedy" },
+      "Terror / Suspenso": { es: "Terror / Suspenso", en: "Horror / Suspense" },
+      "Romance / Novela": { es: "Romance / Novela", en: "Romance" },
+      "Drama": { es: "Drama", en: "Drama" },
+      "Ciencia Ficción": { es: "Ciencia Ficción", en: "Science Fiction" },
+      "Fantasía": { es: "Fantasía", en: "Fantasy" },
+      "General": { es: "General", en: "General" },
+      "Gancho": { es: "Gancho", en: "Hook" },
+      "Introducción": { es: "Introducción", en: "Introduction" },
+      "Desarrollo": { es: "Desarrollo", en: "Body" },
+      "Cierre": { es: "Cierre", en: "Closing" },
+      "Llamado a la acción": { es: "Llamado a la acción", en: "Call to Action" },
+      "Escena": { es: "Escena", en: "Scene" }
+    };
+
+    function catLabel(value) {
+      if (!value) return value;
+      const entry = CATEGORY_LABELS[value];
+      return entry ? entry[currentLang] : value;
+    }
+
+    // ---- Sistema de idioma (ES/EN) ----
+    let currentLang = localStorage.getItem('sf_lang') || 'es';
+
+    const I18N = {
+      es: {
+        "nav.editor": "Editor",
+        "nav.community": "Comunidad",
+        "settings.title": "Opciones Visuales",
+        "settings.dyslexia": "Texto para Dislexia (Lexend)",
+        "header.toggleSidebar": "Mostrar/Ocultar Barra Lateral",
+        "header.logout": "Cerrar sesión",
+        "sidebar.newScript": "Nuevo Guion",
+        "sidebar.newFolder": "Nueva Carpeta",
+        "sidebar.myScripts": "Mis Guiones",
+        "sidebar.exportMd": "Exportar .MD",
+        "sidebar.exportTxt": "Exportar .TXT",
+        "sidebar.allSaved": "Todo guardado",
+        "sidebar.rename": "Renombrar",
+        "sidebar.delete": "Eliminar",
+        "editor.titlePlaceholder": "Nombre del guion...",
+        "editor.format": "Formato:",
+        "editor.category": "Categoría:",
+        "editor.publish": "Publicar",
+        "editor.exit": "Salir",
+        "editor.addBlock": "Añadir bloque",
+        "editor.saveScript": "Guardar Guion",
+        "editor.estimatedTime": "Tiempo estimado",
+        "editor.characterPlaceholder": "Personaje...",
+        "editor.contentPlaceholder": "Escribe el contenido...",
+        "editor.block": "Bloque",
+        "editor.openScript": "Abrir guion",
+        "editor.blocksCount": "bloques",
+        "format.tiktok": "📱 TikTok / Reel",
+        "format.youtube": "🎬 YouTube Long",
+        "format.story": "🎭 Historia / Novela",
+        "empty.greeting": "¡Hola de nuevo! 👋",
+        "empty.subtitle": "Selecciona una opción o elige una plantilla para estructurar tus ideas al instante.",
+        "empty.import": "Importar Guion (.txt, .md)",
+        "empty.templatesTitle": "Plantillas Predefinidas",
+        "empty.tiktokTitle": "TikTok / Instagram Reels",
+        "empty.tiktokDesc": "Gancho visual de 3s, retención de valor y llamada a la acción rápida.",
+        "empty.youtubeTitle": "Video para YouTube",
+        "empty.youtubeDesc": "Estructura tradicional con intro, desarrollo detallado y cierre.",
+        "empty.storyTitle": "Historia / Narrativa",
+        "empty.storyDesc": "Guion basado en personajes, planteamiento de la escena y conflicto.",
+        "empty.recentTitle": "Últimos Guiones Editados",
+        "empty.noScripts": "No tienes guiones creados aún.",
+        "community.title": "🌐 Comunidad de Guionistas",
+        "community.subtitle": "Explora publicaciones de la comunidad o busca contenido específico usando los filtros avanzados.",
+        "community.searchPlaceholder": "Buscar por título, autor o contenido del guion...",
+        "community.filterAllFormats": "🎬 Todos los Formatos",
+        "community.optStory": "🎭 Historia / Novela",
+        "community.badgeStory": "Historia",
+        "community.filterAllCategories": "🏷️ Todas las Categorías",
+        "community.sortRecent": "🕒 Más Recientes",
+        "community.sortPopular": "👍 Más Valorados",
+        "community.sortMostViewed": "👁️ Más Vistos",
+        "community.sortForYou": "✨ Recomendados (Para Ti)",
+        "community.sortFollowing": "🔔 Siguiendo",
+        "community.resetFilters": "Limpiar Filtros",
+        "community.noPublished": "No hay guiones publicados todavía. ¡Sé el primero!",
+        "community.noFollowing": "Aún no sigues a nadie, o las personas que sigues no han publicado nada todavía.",
+        "community.noMatches": "No se encontraron guiones que coincidan con tus filtros de búsqueda.",
+        "community.emptyScript": "Guion vacío...",
+        "community.readFull": "Leer completo",
+        "community.views": "Visitas",
+        "community.deletePublication": "Eliminar Publicación",
+        "community.follow": "+ Seguir",
+        "community.following": "Siguiendo",
+        "readModal.close": "Cerrar lectura",
+        "readModal.publishedOn": "Publicado el",
+        "profile.followers": "seguidores",
+        "profile.following": "siguiendo",
+        "profile.scripts": "guiones",
+        "profile.unfollow": "Dejar de seguir",
+        "profile.noScripts": "Sin publicaciones todavía.",
+        "account.title": "Configuración de Cuenta",
+        "account.subtitle": "Gestiona tu perfil o elimina tus datos de la plataforma.",
+        "account.username": "Usuario:",
+        "account.dangerZone": "Zona Peligrosa",
+        "account.dangerDesc": "Si eliminas tu cuenta, se borrarán todos tus guiones locales, la clave de acceso y tus publicaciones públicas de la comunidad.",
+        "account.deleteBtn": "Eliminar Mi Cuenta Permanentemente",
+        "auth.subtitle": "Inicia sesión para interactuar en la comunidad",
+        "auth.username": "Nombre de Usuario",
+        "auth.usernameShort": "Usuario",
+        "auth.usernamePlaceholder": "Ej. guionista99",
+        "auth.password": "Contraseña",
+        "auth.confirmPassword": "Confirmar Contraseña",
+        "auth.forgotPassword": "¿Olvidaste tu contraseña?",
+        "auth.loginBtn": "Iniciar Sesión",
+        "auth.noAccount": "¿No tienes cuenta?",
+        "auth.registerLink": "Regístrate",
+        "auth.registerBtn": "Crear Cuenta",
+        "auth.hasAccount": "¿Ya tienes cuenta?",
+        "auth.loginLink": "Inicia Sesión",
+        "auth.recoveryKey": "Clave Secreta de Recuperación",
+        "auth.newPassword": "Nueva Contraseña",
+        "auth.resetBtn": "Restablecer Contraseña",
+        "auth.backToLogin": "Volver a Login",
+        "keyModal.title": "¡Guarda tu Clave Secreta!",
+        "keyModal.warning": '⚠️ <strong>IMPORTANTE:</strong> Esta es la <u>ÚNICA VEZ</u> que se mostrará este código. Guárdalo bien en un lugar seguro, ya que no se volverá a mostrar en ningún otro apartado.',
+        "keyModal.confirmBtn": "Entendido, Continuar",
+        // Mensajes de alertas/confirmaciones/prompts
+        "msg.minChars": "Mínimo 3 caracteres",
+        "msg.passMismatch": "Las contraseñas no coinciden",
+        "msg.passwordUpdated": "¡Contraseña actualizada!",
+        "msg.sessionExpired": "Tu sesión expiró o ya no es válida. Vuelve a iniciar sesión.",
+        "msg.onlyDeleteOwn": "Solo puedes eliminar tus propias publicaciones.",
+        "msg.confirmDeletePublication": "¿Estás seguro de que deseas eliminar la publicación \"{title}\" de la Comunidad?",
+        "msg.couldNotDelete": "No se pudo eliminar: ",
+        "msg.confirmDeleteAccount": "⚠️ ADVERTENCIA CRÍTICA:\n\n¿Estás completamente seguro de que deseas borrar la cuenta @{user}? Esta acción eliminará tu usuario de la base de datos y todas tus publicaciones públicas. NO SE PUEDE DESHACER.",
+        "msg.accountDeleted": "Tu cuenta y publicaciones han sido eliminadas correctamente.",
+        "msg.couldNotDeleteAccount": "No se pudo eliminar la cuenta: ",
+        "msg.renamePrompt": "Nuevo nombre para el guion:",
+        "msg.confirmDeleteScript": "¿Estás seguro de que deseas eliminar \"{title}\"?",
+        "msg.loginToPublish": "Inicia sesión para publicar.",
+        "msg.publicationUpdated": "¡Tu publicación ha sido actualizada en la comunidad!",
+        "msg.publicationSuccess": "¡Guion publicado con éxito!",
+        "msg.couldNotPublish": "No se pudo publicar: ",
+        "msg.loginToVote": "Inicia sesión para votar.",
+        "msg.couldNotVote": "No se pudo registrar el voto: ",
+        "msg.loginToFollow": "Inicia sesión para seguir a otros usuarios.",
+        "msg.couldNotUpdate": "No se pudo actualizar: ",
+        "msg.couldNotLoadProfile": "No se pudo cargar el perfil: ",
+        "msg.folderNamePrompt": "Nombre de la carpeta:",
+        "msg.scriptTitlePrompt": "Título del guion:",
+        "tpl.newTiktok": "Nuevo TikTok / Reel",
+        "tpl.tiktokHook": "¡Si haces esto, estás perdiendo tiempo!",
+        "tpl.tiktokCta": "Guarda este video.",
+        "tpl.newYoutube": "Nuevo Video de YouTube",
+        "tpl.youtubeHook": "En este video verás...",
+        "tpl.newStory": "Nueva Historia",
+        "tpl.storyOpening": "La puerta se abrió sola...",
+        "tpl.narrator": "NARRADOR"
+      },
+      en: {
+        "nav.editor": "Editor",
+        "nav.community": "Community",
+        "settings.title": "Display Options",
+        "settings.dyslexia": "Dyslexia-friendly Text (Lexend)",
+        "header.toggleSidebar": "Show/Hide Sidebar",
+        "header.logout": "Log out",
+        "sidebar.newScript": "New Script",
+        "sidebar.newFolder": "New Folder",
+        "sidebar.myScripts": "My Scripts",
+        "sidebar.exportMd": "Export .MD",
+        "sidebar.exportTxt": "Export .TXT",
+        "sidebar.allSaved": "All saved",
+        "sidebar.rename": "Rename",
+        "sidebar.delete": "Delete",
+        "editor.titlePlaceholder": "Script name...",
+        "editor.format": "Format:",
+        "editor.category": "Category:",
+        "editor.publish": "Publish",
+        "editor.exit": "Exit",
+        "editor.addBlock": "Add block",
+        "editor.saveScript": "Save Script",
+        "editor.estimatedTime": "Estimated time",
+        "editor.characterPlaceholder": "Character...",
+        "editor.contentPlaceholder": "Write the content...",
+        "editor.block": "Block",
+        "editor.openScript": "Open script",
+        "editor.blocksCount": "blocks",
+        "format.tiktok": "📱 TikTok / Reel",
+        "format.youtube": "🎬 YouTube Long",
+        "format.story": "🎭 Story / Novel",
+        "empty.greeting": "Welcome back! 👋",
+        "empty.subtitle": "Pick an option or choose a template to structure your ideas instantly.",
+        "empty.import": "Import Script (.txt, .md)",
+        "empty.templatesTitle": "Ready-made Templates",
+        "empty.tiktokTitle": "TikTok / Instagram Reels",
+        "empty.tiktokDesc": "3s visual hook, value retention and a quick call to action.",
+        "empty.youtubeTitle": "YouTube Video",
+        "empty.youtubeDesc": "Traditional structure with intro, detailed body, and closing.",
+        "empty.storyTitle": "Story / Narrative",
+        "empty.storyDesc": "Character-based script, scene setup and conflict.",
+        "empty.recentTitle": "Recently Edited Scripts",
+        "empty.noScripts": "You don't have any scripts yet.",
+        "community.title": "🌐 Screenwriters Community",
+        "community.subtitle": "Explore community posts or search for specific content using the advanced filters.",
+        "community.searchPlaceholder": "Search by title, author, or script content...",
+        "community.filterAllFormats": "🎬 All Formats",
+        "community.optStory": "🎭 Story / Novel",
+        "community.badgeStory": "Story",
+        "community.filterAllCategories": "🏷️ All Categories",
+        "community.sortRecent": "🕒 Most Recent",
+        "community.sortPopular": "👍 Highest Rated",
+        "community.sortMostViewed": "👁️ Most Viewed",
+        "community.sortForYou": "✨ Recommended (For You)",
+        "community.sortFollowing": "🔔 Following",
+        "community.resetFilters": "Clear Filters",
+        "community.noPublished": "No scripts published yet. Be the first!",
+        "community.noFollowing": "You aren't following anyone yet, or the people you follow haven't posted anything yet.",
+        "community.noMatches": "No scripts matched your search filters.",
+        "community.emptyScript": "Empty script...",
+        "community.readFull": "Read full script",
+        "community.views": "Views",
+        "community.deletePublication": "Delete Publication",
+        "community.follow": "+ Follow",
+        "community.following": "Following",
+        "readModal.close": "Close reading",
+        "readModal.publishedOn": "Published on",
+        "profile.followers": "followers",
+        "profile.following": "following",
+        "profile.scripts": "scripts",
+        "profile.unfollow": "Unfollow",
+        "profile.noScripts": "No publications yet.",
+        "account.title": "Account Settings",
+        "account.subtitle": "Manage your profile or delete your data from the platform.",
+        "account.username": "Username:",
+        "account.dangerZone": "Danger Zone",
+        "account.dangerDesc": "If you delete your account, all your local scripts, your recovery key, and your public community publications will be erased.",
+        "account.deleteBtn": "Permanently Delete My Account",
+        "auth.subtitle": "Sign in to interact with the community",
+        "auth.username": "Username",
+        "auth.usernameShort": "Username",
+        "auth.usernamePlaceholder": "E.g. scriptwriter99",
+        "auth.password": "Password",
+        "auth.confirmPassword": "Confirm Password",
+        "auth.forgotPassword": "Forgot your password?",
+        "auth.loginBtn": "Sign In",
+        "auth.noAccount": "Don't have an account?",
+        "auth.registerLink": "Sign Up",
+        "auth.registerBtn": "Create Account",
+        "auth.hasAccount": "Already have an account?",
+        "auth.loginLink": "Sign In",
+        "auth.recoveryKey": "Secret Recovery Key",
+        "auth.newPassword": "New Password",
+        "auth.resetBtn": "Reset Password",
+        "auth.backToLogin": "Back to Login",
+        "keyModal.title": "Save Your Secret Key!",
+        "keyModal.warning": '⚠️ <strong>IMPORTANT:</strong> This is the <u>ONLY TIME</u> this code will be shown. Keep it somewhere safe, since it won\'t be shown again anywhere else.',
+        "keyModal.confirmBtn": "Got it, Continue",
+        "msg.minChars": "Minimum 3 characters",
+        "msg.passMismatch": "Passwords don't match",
+        "msg.passwordUpdated": "Password updated!",
+        "msg.sessionExpired": "Your session expired or is no longer valid. Please sign in again.",
+        "msg.onlyDeleteOwn": "You can only delete your own publications.",
+        "msg.confirmDeletePublication": 'Are you sure you want to delete the publication "{title}" from the Community?',
+        "msg.couldNotDelete": "Couldn't delete: ",
+        "msg.confirmDeleteAccount": "⚠️ CRITICAL WARNING:\n\nAre you completely sure you want to delete the account @{user}? This will remove your user from the database and all your public publications. THIS CANNOT BE UNDONE.",
+        "msg.accountDeleted": "Your account and publications have been successfully deleted.",
+        "msg.couldNotDeleteAccount": "Couldn't delete the account: ",
+        "msg.renamePrompt": "New name for the script:",
+        "msg.confirmDeleteScript": 'Are you sure you want to delete "{title}"?',
+        "msg.loginToPublish": "Sign in to publish.",
+        "msg.publicationUpdated": "Your publication has been updated in the community!",
+        "msg.publicationSuccess": "Script published successfully!",
+        "msg.couldNotPublish": "Couldn't publish: ",
+        "msg.loginToVote": "Sign in to vote.",
+        "msg.couldNotVote": "Couldn't register the vote: ",
+        "msg.loginToFollow": "Sign in to follow other users.",
+        "msg.couldNotUpdate": "Couldn't update: ",
+        "msg.couldNotLoadProfile": "Couldn't load the profile: ",
+        "msg.folderNamePrompt": "Folder name:",
+        "msg.scriptTitlePrompt": "Script title:",
+        "tpl.newTiktok": "New TikTok / Reel",
+        "tpl.tiktokHook": "If you're doing this, you're wasting time!",
+        "tpl.tiktokCta": "Save this video.",
+        "tpl.newYoutube": "New YouTube Video",
+        "tpl.youtubeHook": "In this video you'll see...",
+        "tpl.newStory": "New Story",
+        "tpl.storyOpening": "The door opened by itself...",
+        "tpl.narrator": "NARRATOR"
+      }
+    };
+
+    function t(key, vars) {
+      let str = (I18N[currentLang] && I18N[currentLang][key]) || I18N.es[key] || key;
+      if (vars) { for (const k in vars) str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), vars[k]); }
+      return str;
+    }
+
+    function applyStaticTranslations() {
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+      document.querySelectorAll('[data-i18n-title]').forEach(el => { el.title = t(el.dataset.i18nTitle); });
+      const langBtn = document.getElementById('langToggleBtn');
+      if (langBtn) langBtn.innerText = currentLang === 'es' ? '🌐 ES' : '🌐 EN';
+    }
+
+    function toggleLanguage() { setLanguage(currentLang === 'es' ? 'en' : 'es'); }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('sf_lang', lang);
+      applyStaticTranslations();
+
+      // Volvemos a renderizar todo lo dinámico para que también cambie de idioma
+      renderSidebar();
+      renderRecentScripts();
+      renderAuthHeader();
+      populateCommunityCategoriesFilter();
+      renderCommunityFeed();
+      if (activeScriptId) {
+        const script = appData.scripts.find(s => s.id === activeScriptId);
+        if (script) { populateCategoriesSelect(script.mode, script.category); renderBlocks(); }
+      }
+    }
 
     // Todo lo relacionado a cuentas y a la comunidad ahora vive en el
     // backend (API REST). "appData" (guiones personales/borradores) se
@@ -483,7 +820,7 @@
         setSession(null, null);
         renderAuthHeader();
         loadPublicScripts();
-        throw new Error("Tu sesión expiró o ya no es válida. Vuelve a iniciar sesión.");
+        throw new Error(t("msg.sessionExpired"));
       }
       if (!res.ok) throw new Error(data.error || "Error de red");
       return data;
@@ -509,6 +846,7 @@
 
     window.addEventListener("DOMContentLoaded", async () => {
       loadStorageData();
+      applyStaticTranslations();
       renderSidebar();
       renderRecentScripts();
 
@@ -540,12 +878,12 @@
       if (!select) return;
       
       const allCategories = Array.from(new Set([...CATEGORIES.video, ...CATEGORIES.story]));
-      select.innerHTML = `<option value="all">🏷️ Todas las Categorías</option>`;
+      select.innerHTML = `<option value="all">${t('community.filterAllCategories')}</option>`;
       
       allCategories.forEach(cat => {
         const opt = document.createElement('option');
         opt.value = cat;
-        opt.innerText = cat;
+        opt.innerText = catLabel(cat);
         select.appendChild(opt);
       });
     }
@@ -566,8 +904,8 @@
 
       const ind = document.getElementById("saveIndicator");
       if (ind) {
-        ind.innerText = "Todo guardado";
-        setTimeout(() => ind.innerText = "Todo guardado", 2000);
+        ind.innerText = t("sidebar.allSaved");
+        setTimeout(() => ind.innerText = t("sidebar.allSaved"), 2000);
       }
     }
 
@@ -578,16 +916,16 @@
       if (!script) return;
 
       if (script.author !== currentUser) {
-        alert("Solo puedes eliminar tus propias publicaciones.");
+        alert(t("msg.onlyDeleteOwn"));
         return;
       }
 
-      if (confirm(`¿Estás seguro de que deseas eliminar la publicación "${script.title}" de la Comunidad?`)) {
+      if (confirm(t("msg.confirmDeletePublication", { title: script.title }))) {
         try {
           await apiRequest(`/scripts/${id}`, { method: "DELETE", auth: true });
           await loadPublicScripts();
         } catch (e) {
-          alert("No se pudo eliminar: " + e.message);
+          alert(t("msg.couldNotDelete") + e.message);
         }
       }
     }
@@ -606,7 +944,7 @@
     async function deleteUserAccount() {
       if (!currentUser) return;
 
-      const confirmDelete = confirm(`⚠️ ADVERTENCIA CRÍTICA:\n\n¿Estás completamente seguro de que deseas borrar la cuenta @${currentUser}? Esta acción eliminará tu usuario de la base de datos y todas tus publicaciones públicas. NO SE PUEDE DESHACER.`);
+      const confirmDelete = confirm(t("msg.confirmDeleteAccount", { user: currentUser }));
       
       if (confirmDelete) {
         try {
@@ -615,9 +953,9 @@
           closeAccountModal();
           renderAuthHeader();
           await loadPublicScripts();
-          alert("Tu cuenta y publicaciones han sido eliminadas correctamente.");
+          alert(t("msg.accountDeleted"));
         } catch (e) {
-          alert("No se pudo eliminar la cuenta: " + e.message);
+          alert(t("msg.couldNotDeleteAccount") + e.message);
         }
       }
     }
@@ -628,7 +966,7 @@
       const script = appData.scripts.find(s => s.id === id);
       if (!script) return;
 
-      const newTitle = prompt("Nuevo nombre para el guion:", script.title);
+      const newTitle = prompt(t("msg.renamePrompt"), script.title);
       if (newTitle && newTitle.trim() !== "") {
         script.title = newTitle.trim();
         manualSaveScript();
@@ -647,7 +985,7 @@
       const script = appData.scripts.find(s => s.id === id);
       if (!script) return;
 
-      if (confirm(`¿Estás seguro de que deseas eliminar "${script.title}"?`)) {
+      if (confirm(t("msg.confirmDeleteScript", { title: script.title }))) {
         appData.scripts = appData.scripts.filter(s => s.id !== id);
         manualSaveScript();
         if (activeScriptId === id) {
@@ -666,7 +1004,7 @@
       optionsList.forEach(cat => {
         const opt = document.createElement('option');
         opt.value = cat;
-        opt.innerText = cat;
+        opt.innerText = catLabel(cat);
         if (selectedCategory && selectedCategory === cat) opt.selected = true;
         select.appendChild(opt);
       });
@@ -702,11 +1040,11 @@
         container.innerHTML = `
           <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded-lg">
             <button onclick="openAccountModal()" class="text-xs font-semibold text-indigo-400 hover:underline">@${currentUser}</button>
-            <button onclick="handleLogout()" class="text-slate-500 hover:text-red-400 text-xs transition" title="Cerrar sesión">🚪</button>
+            <button onclick="handleLogout()" class="text-slate-500 hover:text-red-400 text-xs transition" title="${t('header.logout')}">🚪</button>
           </div>
         `;
       } else {
-        container.innerHTML = `<button onclick="openAuthModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition">Iniciar Sesión</button>`;
+        container.innerHTML = `<button onclick="openAuthModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition">${t('auth.loginBtn')}</button>`;
       }
     }
 
@@ -727,8 +1065,8 @@
       const username = document.getElementById('regUser').value.trim().toLowerCase();
       const pass = document.getElementById('regPass').value;
       const passConfirm = document.getElementById('regPassConfirm').value;
-      if (username.length < 3) return showAuthAlert('Mínimo 3 caracteres', 'error');
-      if (pass !== passConfirm) return showAuthAlert('Las contraseñas no coinciden', 'error');
+      if (username.length < 3) return showAuthAlert(t('msg.minChars'), 'error');
+      if (pass !== passConfirm) return showAuthAlert(t('msg.passMismatch'), 'error');
 
       try {
         const data = await apiRequest('/auth/register', { method: "POST", body: { username, password: pass } });
@@ -767,7 +1105,7 @@
       const newPass = document.getElementById('recNewPass').value;
       try {
         await apiRequest('/auth/recover', { method: "POST", body: { username, recoveryKey: key, newPassword: newPass } });
-        showAuthAlert('¡Contraseña actualizada!', 'success');
+        showAuthAlert(t('msg.passwordUpdated'), 'success');
         setTimeout(() => switchAuthSubView('login'), 1500);
       } catch (err) {
         showAuthAlert(err.message, 'error');
@@ -798,7 +1136,7 @@
     }
 
     async function publishActiveScript() {
-      if (!currentUser) { alert("Inicia sesión para publicar."); openAuthModal(); return; }
+      if (!currentUser) { alert(t("msg.loginToPublish")); openAuthModal(); return; }
       const script = appData.scripts.find(s => s.id === activeScriptId);
       if (!script) return;
 
@@ -816,11 +1154,11 @@
             blocks: script.blocks
           }
         });
-        alert(data.updated ? "¡Tu publicación ha sido actualizada en la comunidad!" : "¡Guion publicado con éxito!");
+        alert(data.updated ? t("msg.publicationUpdated") : t("msg.publicationSuccess"));
         await loadPublicScripts();
         switchMainTab('community');
       } catch (err) {
-        alert("No se pudo publicar: " + err.message);
+        alert(t("msg.couldNotPublish") + err.message);
       }
     }
 
@@ -831,7 +1169,7 @@
       container.innerHTML = "";
 
       if (publicScripts.length === 0) {
-        container.innerHTML = `<div class="col-span-full bg-slate-900/30 border border-dashed border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-xs">No hay guiones publicados todavía. ¡Sé el primero!</div>`;
+        container.innerHTML = `<div class="col-span-full bg-slate-900/30 border border-dashed border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-xs">${t('community.noPublished')}</div>`;
         return;
       }
 
@@ -871,12 +1209,12 @@
       }
 
       if (sortFilter === 'following' && filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full bg-slate-900/30 border border-dashed border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-xs">Aún no sigues a nadie, o las personas que sigues no han publicado nada todavía.</div>`;
+        container.innerHTML = `<div class="col-span-full bg-slate-900/30 border border-dashed border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-xs">${t('community.noFollowing')}</div>`;
         return;
       }
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full bg-slate-900/30 border border-dashed border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-xs">No se encontraron guiones que coincidan con tus filtros de búsqueda.</div>`;
+        container.innerHTML = `<div class="col-span-full bg-slate-900/30 border border-dashed border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-xs">${t('community.noMatches')}</div>`;
         return;
       }
 
@@ -889,19 +1227,19 @@
         const card = document.createElement('div');
         card.className = "bg-slate-900/50 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg relative group";
 
-        const firstBlockText = script.blocks && script.blocks[0] ? script.blocks[0].content : "Guion vacío...";
+        const firstBlockText = script.blocks && script.blocks[0] ? script.blocks[0].content : t('community.emptyScript');
 
         card.innerHTML = `
           <div>
             <div class="flex items-center justify-between gap-2 mb-2">
               <div class="flex items-center gap-1.5">
-                <span class="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">${script.mode === 'youtube' ? 'YouTube' : script.mode === 'tiktok' ? 'TikTok' : 'Historia'}</span>
-                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">${escapeHtml(script.category || 'General')}</span>
+                <span class="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">${script.mode === 'youtube' ? 'YouTube' : script.mode === 'tiktok' ? 'TikTok' : t('community.badgeStory')}</span>
+                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">${escapeHtml(catLabel(script.category) || catLabel('General'))}</span>
               </div>
               <div class="flex items-center gap-2">
                 <button onclick="openProfileModal('${escapeHtml(script.author)}', event)" class="text-[11px] text-slate-400 font-semibold hover:text-white transition">@${escapeHtml(script.author)}</button>
-                ${!isOwner ? `<button onclick="toggleFollow('${escapeHtml(script.author)}', event)" class="text-[10px] font-bold px-2 py-0.5 rounded-full border transition ${isFollowingAuthor ? 'bg-slate-800 border-slate-700 text-slate-400 hover:text-red-400 hover:border-red-500/40' : 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300 hover:bg-indigo-600/30'}">${isFollowingAuthor ? 'Siguiendo' : '+ Seguir'}</button>` : ''}
-                ${isOwner ? `<button onclick="deletePublicScript('${script.id}', event)" class="text-slate-500 hover:text-red-400 text-xs transition ml-1" title="Eliminar Publicación">🗑️</button>` : ''}
+                ${!isOwner ? `<button onclick="toggleFollow('${escapeHtml(script.author)}', event)" class="text-[10px] font-bold px-2 py-0.5 rounded-full border transition ${isFollowingAuthor ? 'bg-slate-800 border-slate-700 text-slate-400 hover:text-red-400 hover:border-red-500/40' : 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300 hover:bg-indigo-600/30'}">${isFollowingAuthor ? t('community.following') : t('community.follow')}</button>` : ''}
+                ${isOwner ? `<button onclick="deletePublicScript('${script.id}', event)" class="text-slate-500 hover:text-red-400 text-xs transition ml-1" title="${t('community.deletePublication')}">🗑️</button>` : ''}
               </div>
             </div>
             <h3 class="text-base font-bold text-white mb-2 line-clamp-1">${escapeHtml(script.title)}</h3>
@@ -912,10 +1250,10 @@
 
           <div class="flex items-center justify-between pt-3 border-t border-slate-800/60">
             <button onclick="openReadScriptModal('${script.id}')" class="text-xs text-indigo-400 font-bold hover:text-indigo-300 transition flex items-center gap-1">
-              <span>📖 Leer completo</span> <span>→</span>
+              <span>📖 ${t('community.readFull')}</span> <span>→</span>
             </button>
             <div class="flex items-center gap-2">
-              <span class="flex items-center gap-1 px-2 py-1 text-xs text-slate-500" title="Visitas">👁️ ${script.views || 0}</span>
+              <span class="flex items-center gap-1 px-2 py-1 text-xs text-slate-500" title="${t('community.views')}">👁️ ${script.views || 0}</span>
               <button onclick="votePublicScript('${script.id}', 'like')" class="flex items-center gap-1 px-2.5 py-1 rounded-lg border text-xs font-semibold transition ${hasLiked ? 'bg-indigo-600/30 border-indigo-500 text-indigo-300' : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-white'}">
                 👍 <span>${script.likes.length}</span>
               </button>
@@ -931,7 +1269,7 @@
     }
 
     async function votePublicScript(id, type) {
-      if (!currentUser) { alert("Inicia sesión para votar."); openAuthModal(); return; }
+      if (!currentUser) { alert(t("msg.loginToVote")); openAuthModal(); return; }
       const script = publicScripts.find(s => s.id === id);
       if (!script) return;
 
@@ -944,14 +1282,14 @@
         await apiRequest(`/scripts/${id}/vote`, { method: "POST", auth: true, body: { type } });
         await loadPublicScripts();
       } catch (err) {
-        alert("No se pudo registrar el voto: " + err.message);
+        alert(t("msg.couldNotVote") + err.message);
       }
     }
 
     /* SEGUIR / DEJAR DE SEGUIR USUARIOS */
     async function toggleFollow(username, event) {
       if (event) event.stopPropagation();
-      if (!currentUser) { alert("Inicia sesión para seguir a otros usuarios."); openAuthModal(); return; }
+      if (!currentUser) { alert(t("msg.loginToFollow")); openAuthModal(); return; }
       if (username === currentUser) return;
 
       try {
@@ -965,11 +1303,11 @@
         const readFollowBtn = document.getElementById('readModalFollowBtn');
         if (readFollowBtn && readFollowBtn.dataset.username === username) {
           const nowFollowing = followingList.includes(username);
-          readFollowBtn.innerText = nowFollowing ? 'Siguiendo' : '+ Seguir';
+          readFollowBtn.innerText = nowFollowing ? t('community.following') : t('community.follow');
           readFollowBtn.className = `text-[10px] font-bold px-2 py-0.5 rounded-full border transition ${nowFollowing ? 'bg-slate-800 border-slate-700 text-slate-400' : 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300'}`;
         }
       } catch (err) {
-        alert("No se pudo actualizar: " + err.message);
+        alert(t("msg.couldNotUpdate") + err.message);
       }
     }
 
@@ -981,7 +1319,7 @@
       try {
         profile = await apiRequest(`/users/${encodeURIComponent(username)}`, { auth: true });
       } catch (err) {
-        alert("No se pudo cargar el perfil: " + err.message);
+        alert(t("msg.couldNotLoadProfile") + err.message);
         return;
       }
 
@@ -995,14 +1333,14 @@
         btn.style.display = 'none';
       } else {
         btn.style.display = 'block';
-        btn.innerText = profile.isFollowing ? 'Dejar de seguir' : '+ Seguir';
+        btn.innerText = profile.isFollowing ? t('profile.unfollow') : t('community.follow');
         btn.className = `w-full py-2.5 rounded-xl font-bold text-xs transition ${profile.isFollowing ? 'bg-slate-800 border border-slate-700 text-slate-300 hover:text-red-400 hover:border-red-500/40' : 'bg-indigo-600 hover:bg-indigo-500 text-white'}`;
       }
 
       const scriptsOfAuthor = publicScripts.filter(s => s.author === username);
       const listEl = document.getElementById('profileScriptsList');
       listEl.innerHTML = scriptsOfAuthor.length === 0
-        ? `<p class="text-xs text-slate-500 text-center py-2">Sin publicaciones todavía.</p>`
+        ? `<p class="text-xs text-slate-500 text-center py-2">${t('profile.noScripts')}</p>`
         : scriptsOfAuthor.map(s => `
             <button onclick="closeProfileModal(); openReadScriptModal('${s.id}')" class="w-full text-left bg-slate-950/60 border border-slate-800 rounded-xl px-3 py-2 hover:border-indigo-500/40 transition">
               <p class="text-xs font-semibold text-slate-200 truncate">${escapeHtml(s.title)}</p>
@@ -1035,9 +1373,9 @@
       const isFollowingAuthor = followingList.includes(script.author);
       document.getElementById('readModalAuthor').innerHTML = `
         <button onclick="openProfileModal('${escapeHtml(script.author)}')" class="hover:text-white transition font-semibold">@${escapeHtml(script.author)}</button>
-        <span>• Publicado el ${escapeHtml(script.date)}</span>
-        <span class="flex items-center gap-1" title="Visitas">👁️ <span id="readModalViews">${script.views || 0}</span></span>
-        ${!isOwner ? `<button id="readModalFollowBtn" data-username="${escapeHtml(script.author)}" onclick="toggleFollow('${escapeHtml(script.author)}')" class="text-[10px] font-bold px-2 py-0.5 rounded-full border transition ${isFollowingAuthor ? 'bg-slate-800 border-slate-700 text-slate-400' : 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300'}">${isFollowingAuthor ? 'Siguiendo' : '+ Seguir'}</button>` : ''}
+        <span>• ${t('readModal.publishedOn')} ${escapeHtml(script.date)}</span>
+        <span class="flex items-center gap-1" title="${t('community.views')}">👁️ <span id="readModalViews">${script.views || 0}</span></span>
+        ${!isOwner ? `<button id="readModalFollowBtn" data-username="${escapeHtml(script.author)}" onclick="toggleFollow('${escapeHtml(script.author)}')" class="text-[10px] font-bold px-2 py-0.5 rounded-full border transition ${isFollowingAuthor ? 'bg-slate-800 border-slate-700 text-slate-400' : 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300'}">${isFollowingAuthor ? t('community.following') : t('community.follow')}</button>` : ''}
       `;
 
       // Registrar la visita en el servidor (se deduplica por usuario del lado del servidor)
@@ -1049,7 +1387,7 @@
       } catch (e) { /* no bloquea la lectura si falla */ }
 
       document.getElementById('readModalMode').innerText = script.mode;
-      document.getElementById('readModalCategory').innerText = script.category || 'General';
+      document.getElementById('readModalCategory').innerText = catLabel(script.category) || catLabel('General');
 
       const body = document.getElementById('readModalBody');
       body.innerHTML = "";
@@ -1059,20 +1397,20 @@
         blockDiv.className = "p-5 bg-slate-950/70 border border-slate-800/80 rounded-2xl shadow-inner space-y-2";
 
         if (script.mode === 'story') {
-          const charName = b.character ? b.character.toUpperCase() : 'NARRADOR';
+          const charName = b.character ? b.character.toUpperCase() : t('tpl.narrator');
           blockDiv.innerHTML = `
             <div class="flex items-center gap-2">
               <span class="text-xs font-bold text-indigo-400 tracking-wider bg-indigo-500/10 px-2.5 py-0.5 rounded-md border border-indigo-500/20">🗣️ ${escapeHtml(charName)}</span>
-              <span class="text-[10px] font-mono text-slate-600">Bloque #${i + 1}</span>
+              <span class="text-[10px] font-mono text-slate-600">${t('editor.block')} #${i + 1}</span>
             </div>
             <p class="text-slate-200 text-sm md:text-base leading-relaxed pl-1 pt-1 font-serif">${escapeHtml(b.content)}</p>
           `;
         } else {
-          const catName = b.category || 'Escena';
+          const catName = catLabel(b.category) || catLabel('Escena');
           blockDiv.innerHTML = `
             <div class="flex items-center gap-2">
               <span class="text-xs font-bold text-emerald-400 tracking-wider bg-emerald-500/10 px-2.5 py-0.5 rounded-md border border-emerald-500/20">📌 ${escapeHtml(catName)}</span>
-              <span class="text-[10px] font-mono text-slate-600">Bloque #${i + 1}</span>
+              <span class="text-[10px] font-mono text-slate-600">${t('editor.block')} #${i + 1}</span>
             </div>
             <p class="text-slate-200 text-sm md:text-base leading-relaxed pl-1 pt-1 font-sans">${escapeHtml(b.content)}</p>
           `;
@@ -1095,7 +1433,7 @@
       container.innerHTML = "";
 
       if (!appData.scripts || appData.scripts.length === 0) {
-        container.innerHTML = `<div class="col-span-full bg-slate-900/20 border border-dashed border-slate-800 rounded-2xl p-6 text-center text-xs text-slate-500">No tienes guiones creados aún.</div>`;
+        container.innerHTML = `<div class="col-span-full bg-slate-900/20 border border-dashed border-slate-800 rounded-2xl p-6 text-center text-xs text-slate-500">${t('empty.noScripts')}</div>`;
         return;
       }
 
@@ -1108,11 +1446,11 @@
           <div>
             <div class="flex items-center justify-between gap-2 mb-2">
               <span class="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20">${script.mode}</span>
-              <span class="text-[10px] text-slate-500 font-mono">${script.blocks ? script.blocks.length : 0} bloques</span>
+              <span class="text-[10px] text-slate-500 font-mono">${script.blocks ? script.blocks.length : 0} ${t('editor.blocksCount')}</span>
             </div>
             <h4 class="text-sm font-semibold text-slate-200 group-hover:text-indigo-300 transition line-clamp-1 mb-1">📄 ${escapeHtml(script.title)}</h4>
           </div>
-          <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500"><span>Abrir guion</span><span>→</span></div>
+          <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500"><span>${t('editor.openScript')}</span><span>→</span></div>
         `;
         container.appendChild(card);
       });
@@ -1122,11 +1460,11 @@
       const timestamp = Date.now();
       let templateScript = null;
       if (type === "tiktok") {
-        templateScript = { id: "s_" + timestamp, folderId: null, title: "Nuevo TikTok / Reel", mode: "tiktok", category: "Entretenimiento", blocks: [{ id: "b1_" + timestamp, category: "Gancho", content: "¡Si haces esto, estás perdiendo tiempo!" }, { id: "b2_" + timestamp, category: "Llamado a la acción", content: "Guarda este video." }] };
+        templateScript = { id: "s_" + timestamp, folderId: null, title: t("tpl.newTiktok"), mode: "tiktok", category: "Entretenimiento", blocks: [{ id: "b1_" + timestamp, category: "Gancho", content: t("tpl.tiktokHook") }, { id: "b2_" + timestamp, category: "Llamado a la acción", content: t("tpl.tiktokCta") }] };
       } else if (type === "youtube") {
-        templateScript = { id: "s_" + timestamp, folderId: null, title: "Nuevo Video de YouTube", mode: "youtube", category: "Educación", blocks: [{ id: "b1_" + timestamp, category: "Gancho", content: "En este video verás..." }] };
+        templateScript = { id: "s_" + timestamp, folderId: null, title: t("tpl.newYoutube"), mode: "youtube", category: "Educación", blocks: [{ id: "b1_" + timestamp, category: "Gancho", content: t("tpl.youtubeHook") }] };
       } else if (type === "story") {
-        templateScript = { id: "s_" + timestamp, folderId: null, title: "Nueva Historia", mode: "story", category: "Terror / Suspenso", blocks: [{ id: "b1_" + timestamp, character: "NARRADOR", content: "La puerta se abrió sola..." }] };
+        templateScript = { id: "s_" + timestamp, folderId: null, title: t("tpl.newStory"), mode: "story", category: "Terror / Suspenso", blocks: [{ id: "b1_" + timestamp, character: t("tpl.narrator"), content: t("tpl.storyOpening") }] };
       }
       if (templateScript) {
         appData.scripts.push(templateScript);
@@ -1196,8 +1534,8 @@
         const row = document.createElement("div");
         row.className = "block-row p-3 rounded-xl border border-slate-800/50 bg-slate-900/40 space-y-2 relative group";
         let selectorHTML = script.mode === "story" 
-          ? `<input type="text" list="charactersList" placeholder="Personaje..." value="${escapeHtml(block.character || "")}" oninput="updateBlockData(${index}, 'character', this.value)" class="bg-slate-950 border border-slate-800 text-xs text-indigo-300 font-semibold rounded-md px-2.5 py-1 w-44" />`
-          : `<select onchange="updateBlockData(${index}, 'category', this.value)" class="bg-slate-950 border border-slate-800 text-xs text-emerald-400 font-semibold rounded-md px-2.5 py-1 w-44">${YOUTUBE_BLOCK_TYPES.map(c => `<option value="${c}" ${block.category === c ? "selected" : ""}>${c}</option>`).join("")}</select>`;
+          ? `<input type="text" list="charactersList" placeholder="${t('editor.characterPlaceholder')}" value="${escapeHtml(block.character || "")}" oninput="updateBlockData(${index}, 'character', this.value)" class="bg-slate-950 border border-slate-800 text-xs text-indigo-300 font-semibold rounded-md px-2.5 py-1 w-44" />`
+          : `<select onchange="updateBlockData(${index}, 'category', this.value)" class="bg-slate-950 border border-slate-800 text-xs text-emerald-400 font-semibold rounded-md px-2.5 py-1 w-44">${YOUTUBE_BLOCK_TYPES.map(c => `<option value="${c}" ${block.category === c ? "selected" : ""}>${catLabel(c)}</option>`).join("")}</select>`;
 
         row.innerHTML = `
           <div class="flex items-center justify-between gap-2">
@@ -1208,7 +1546,7 @@
               <button onclick="deleteBlock(${index})" class="p-1 text-slate-500 hover:text-red-400 ml-1">✕</button>
             </div>
           </div>
-          <textarea rows="1" placeholder="Escribe el contenido..." oninput="autoResizeTextarea(this); updateBlockData(${index}, 'content', this.value)" class="script-textarea w-full bg-transparent text-slate-200 text-sm focus:outline-none resize-none">${escapeHtml(block.content || "")}</textarea>
+          <textarea rows="1" placeholder="${t('editor.contentPlaceholder')}" oninput="autoResizeTextarea(this); updateBlockData(${index}, 'content', this.value)" class="script-textarea w-full bg-transparent text-slate-200 text-sm focus:outline-none resize-none">${escapeHtml(block.content || "")}</textarea>
         `;
         container.appendChild(row);
         autoResizeTextarea(row.querySelector("textarea"));
@@ -1225,8 +1563,8 @@
     function toggleSidebar() { document.body.classList.toggle("clean-ui"); }
     function toggleSettingsMenu() { document.getElementById("settingsPanel").classList.toggle("hidden"); }
     function toggleDyslexiaMode() { document.body.classList.toggle("dyslexia-mode"); }
-    function createNewFolder() { const name = prompt("Nombre de la carpeta:"); if (name) { appData.folders.push({ id: "f_" + Date.now(), name: name.trim() }); renderSidebar(); manualSaveScript(); } }
-    function createNewScript() { const title = prompt("Título del guion:"); if (title) { const newScript = { id: "s_" + Date.now(), folderId: null, title: title.trim(), mode: "tiktok", category: "Entretenimiento", blocks: [{ id: "b_" + Date.now(), character: "", category: "Gancho", content: "" }] }; appData.scripts.push(newScript); manualSaveScript(); renderSidebar(); loadScript(newScript.id); } }
+    function createNewFolder() { const name = prompt(t("msg.folderNamePrompt")); if (name) { appData.folders.push({ id: "f_" + Date.now(), name: name.trim() }); renderSidebar(); manualSaveScript(); } }
+    function createNewScript() { const title = prompt(t("msg.scriptTitlePrompt")); if (title) { const newScript = { id: "s_" + Date.now(), folderId: null, title: title.trim(), mode: "tiktok", category: "Entretenimiento", blocks: [{ id: "b_" + Date.now(), character: "", category: "Gancho", content: "" }] }; appData.scripts.push(newScript); manualSaveScript(); renderSidebar(); loadScript(newScript.id); } }
 
     function renderSidebar() {
       const container = document.getElementById("sidebarList");
@@ -1249,8 +1587,8 @@
         item.innerHTML = `
           <span class="truncate flex-1">📄 ${escapeHtml(script.title)}</span>
           <div class="sidebar-actions flex items-center gap-1">
-            <button onclick="renameScript('${script.id}', event)" class="p-1 text-slate-500 hover:text-indigo-400 transition" title="Renombrar">✏️</button>
-            <button onclick="deleteScript('${script.id}', event)" class="p-1 text-slate-500 hover:text-red-400 transition" title="Eliminar">🗑️</button>
+            <button onclick="renameScript('${script.id}', event)" class="p-1 text-slate-500 hover:text-indigo-400 transition" title="${t('sidebar.rename')}">✏️</button>
+            <button onclick="deleteScript('${script.id}', event)" class="p-1 text-slate-500 hover:text-red-400 transition" title="${t('sidebar.delete')}">🗑️</button>
           </div>
         `;
         if (script.folderId) { const target = document.getElementById(`f-container-${script.folderId}`); if (target) target.appendChild(item); else looseDiv.appendChild(item); } else { looseDiv.appendChild(item); }
@@ -1263,7 +1601,7 @@
       let totalWords = 0;
       script.blocks.forEach(b => { if (b.content) totalWords += b.content.trim().split(/\s+/).length; });
       const secs = Math.ceil((totalWords / 130) * 60);
-      document.getElementById("totalTimeCounter").innerText = `Tiempo estimado: ${Math.floor(secs / 60)}m ${secs % 60}s`;
+      document.getElementById("totalTimeCounter").innerText = `${t('editor.estimatedTime')}: ${Math.floor(secs / 60)}m ${secs % 60}s`;
     }
 
     function updateCharactersDatalist() {
@@ -1280,8 +1618,9 @@
     function exportScript(type) {
       const script = appData.scripts.find(s => s.id === activeScriptId);
       if (!script) return;
-      let content = `# ${script.title}\nCategoría: ${script.category}\n\n`;
-      script.blocks.forEach(b => { content += script.mode === "story" ? `**${b.character || "NARRADOR"}:** ${b.content}\n\n` : `### [${b.category}]\n${b.content}\n\n`; });
+      const catLine = currentLang === 'en' ? 'Category' : 'Categoría';
+      let content = `# ${script.title}\n${catLine}: ${catLabel(script.category)}\n\n`;
+      script.blocks.forEach(b => { content += script.mode === "story" ? `**${b.character || t('tpl.narrator')}:** ${b.content}\n\n` : `### [${catLabel(b.category)}]\n${b.content}\n\n`; });
       const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
