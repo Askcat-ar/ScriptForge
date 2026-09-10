@@ -1,3 +1,4 @@
+[README.md](https://github.com/user-attachments/files/32066063/README.md)
 # ScriptForge — Backend simple
 
 Este backend reemplaza la simulación de cuentas/comunidad que antes vivía
@@ -75,6 +76,19 @@ verlo ahí. Esa es la diferencia clave: ahora sí es una comunidad compartida.
   publicación, desde el modal de lectura, o desde su perfil (clic en su
   `@usuario`). El filtro "🔔 Siguiendo" en la Comunidad muestra solo
   publicaciones de gente que sigues.
+
+## Idioma (Español / English)
+
+Hay un botón 🌐 en el encabezado (junto al ícono de ajustes) para cambiar
+toda la interfaz entre español e inglés. La preferencia se guarda en el
+navegador de cada persona (no es una cuenta compartida), así que cada
+quien puede usar el idioma que prefiera.
+
+Las categorías y tipos de bloque (por ejemplo "Comedia", "Gancho") se
+guardan internamente siempre en español para no romper la compatibilidad
+con guiones ya publicados — el botón de idioma solo cambia lo que se
+**muestra** en pantalla, usando el diccionario `CATEGORY_LABELS` dentro
+de `public/index.html`.
 
 Las rutas con "Auth: Sí" requieren el header:
 `Authorization: Bearer <token>`
