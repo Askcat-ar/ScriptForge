@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/32066063/README.md)
+[README.md](https://github.com/user-attachments/files/32130426/README.md)
 # ScriptForge — Backend simple
 
 Este backend reemplaza la simulación de cuentas/comunidad que antes vivía
