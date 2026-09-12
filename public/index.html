@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -30,6 +30,23 @@
   </script>
 
   <style>
+    /* OpenDyslexic — fuente pensada para facilitar la lectura a personas con dislexia */
+    @font-face {
+      font-family: "OpenDyslexic";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/fontsource/fonts/opendyslexic@latest/latin-400-normal.woff2") format("woff2"),
+           url("https://cdn.jsdelivr.net/fontsource/fonts/opendyslexic@latest/latin-400-normal.woff") format("woff");
+    }
+    @font-face {
+      font-family: "OpenDyslexic";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("https://cdn.jsdelivr.net/fontsource/fonts/opendyslexic@latest/latin-700-normal.woff2") format("woff2"),
+           url("https://cdn.jsdelivr.net/fontsource/fonts/opendyslexic@latest/latin-700-normal.woff") format("woff");
+    }
     * { box-sizing: border-box; }
     html, body {
       height: 100%;
@@ -40,7 +57,7 @@
     }
     ::selection { background: rgba(99, 102, 241, 0.35); }
     textarea, input, button, select { font: inherit; }
-    .dyslexia-mode, .dyslexia-mode * { font-family: "Lexend", sans-serif !important; }
+    .dyslexia-mode, .dyslexia-mode * { font-family: "OpenDyslexic", sans-serif !important; }
     ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #080d1a; }
     ::-webkit-scrollbar-thumb { background: #273449; border-radius: 999px; }
@@ -108,9 +125,9 @@
       <div id="settingsPanel" class="hidden absolute right-4 top-14 w-64 bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-2xl z-50">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3" data-i18n="settings.title">Opciones Visuales</h3>
         <div class="flex items-center justify-between">
-          <span class="text-xs text-slate-300 font-medium" data-i18n="settings.dyslexia">Texto para Dislexia (Lexend)</span>
+          <span class="text-xs text-slate-300 font-medium" data-i18n="settings.dyslexia">Texto para Dislexia (OpenDyslexic)</span>
           <button id="dyslexiaToggle" onclick="toggleDyslexiaMode()" class="w-10 h-5 bg-slate-800 rounded-full relative p-0.5 transition-colors">
-            <span class="block w-4 h-4 bg-slate-400 rounded-full transition-transform transform translate-x-0"></span>
+            <span id="dyslexiaToggleKnob" class="block w-4 h-4 bg-slate-400 rounded-full transition-transform transform translate-x-0"></span>
           </button>
         </div>
       </div>
@@ -493,7 +510,7 @@
         "nav.editor": "Editor",
         "nav.community": "Comunidad",
         "settings.title": "Opciones Visuales",
-        "settings.dyslexia": "Texto para Dislexia (Lexend)",
+        "settings.dyslexia": "Texto para Dislexia (OpenDyslexic)",
         "header.toggleSidebar": "Mostrar/Ocultar Barra Lateral",
         "header.logout": "Cerrar sesión",
         "sidebar.newScript": "Nuevo Guion",
@@ -624,7 +641,7 @@
         "nav.editor": "Editor",
         "nav.community": "Community",
         "settings.title": "Display Options",
-        "settings.dyslexia": "Dyslexia-friendly Text (Lexend)",
+        "settings.dyslexia": "Dyslexia-friendly Text (OpenDyslexic)",
         "header.toggleSidebar": "Show/Hide Sidebar",
         "header.logout": "Log out",
         "sidebar.newScript": "New Script",
@@ -847,6 +864,7 @@
     window.addEventListener("DOMContentLoaded", async () => {
       loadStorageData();
       applyStaticTranslations();
+      applyDyslexiaModeUI(localStorage.getItem("sf_dyslexia_mode") === "true");
       renderSidebar();
       renderRecentScripts();
 
@@ -1562,7 +1580,24 @@
     function updateActiveScriptTitle(val) { const script = appData.scripts.find(s => s.id === activeScriptId); if (script) { script.title = val; renderSidebar(); } }
     function toggleSidebar() { document.body.classList.toggle("clean-ui"); }
     function toggleSettingsMenu() { document.getElementById("settingsPanel").classList.toggle("hidden"); }
-    function toggleDyslexiaMode() { document.body.classList.toggle("dyslexia-mode"); }
+
+    function applyDyslexiaModeUI(isOn) {
+      document.body.classList.toggle("dyslexia-mode", isOn);
+      const btn = document.getElementById("dyslexiaToggle");
+      const knob = document.getElementById("dyslexiaToggleKnob");
+      if (btn) btn.classList.toggle("bg-indigo-600", isOn);
+      if (btn) btn.classList.toggle("bg-slate-800", !isOn);
+      if (knob) knob.classList.toggle("translate-x-5", isOn);
+      if (knob) knob.classList.toggle("translate-x-0", !isOn);
+      if (knob) knob.classList.toggle("bg-white", isOn);
+      if (knob) knob.classList.toggle("bg-slate-400", !isOn);
+    }
+
+    function toggleDyslexiaMode() {
+      const isOn = !document.body.classList.contains("dyslexia-mode");
+      applyDyslexiaModeUI(isOn);
+      localStorage.setItem("sf_dyslexia_mode", isOn ? "true" : "false");
+    }
     function createNewFolder() { const name = prompt(t("msg.folderNamePrompt")); if (name) { appData.folders.push({ id: "f_" + Date.now(), name: name.trim() }); renderSidebar(); manualSaveScript(); } }
     function createNewScript() { const title = prompt(t("msg.scriptTitlePrompt")); if (title) { const newScript = { id: "s_" + Date.now(), folderId: null, title: title.trim(), mode: "tiktok", category: "Entretenimiento", blocks: [{ id: "b_" + Date.now(), character: "", category: "Gancho", content: "" }] }; appData.scripts.push(newScript); manualSaveScript(); renderSidebar(); loadScript(newScript.id); } }
 
